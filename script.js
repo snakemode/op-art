@@ -3,3 +3,6 @@
 
 // prints "hi" in the browser's dev tools console
 console.log('hi');
+
+
+var randomItem = myArray[Math.floor(Math.random()*myArray.length)];
