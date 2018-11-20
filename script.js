@@ -2,7 +2,10 @@
     to your site with Javascript */
 
 // prints "hi" in the browser's dev tools console
-console.log('hi');
 
 
-var randomItem = myArray[Math.floor(Math.random()*myArray.length)];
+let len = document.getElementsByClassName("square");
+
+var randomItem = len[Math.floor(Math.random()*len.length)];
+
+console.log(randomItem);
