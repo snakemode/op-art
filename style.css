@@ -1,11 +1,21 @@
 /* CSS files add styling rules to your content */
 
 body {
-  font-family: "Benton Sans", "Helvetica Neue", helvetica, arial, sans-serif;
-  margin: 2em;
+  display: grid;
+  border: 50px solid #000;
+  padding: 100px;
+  box-shadow
 }
 
-h1 {
-  font-style: italic;
-  color: #373fff;
+div {
+  width: 200px;
+  height: 200px;
+  background: repeating-linear-gradient(
+  45deg,
+  #fff,
+  #fff 10px,
+  #333 10px,
+  #333 20px
+);
 }
+
