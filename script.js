@@ -8,8 +8,10 @@ let len = document.getElementsByClassName("square");
 let quantity = Math.floor(Math.random() * len.length);
 console.log(quantity);
 
-var randomItem = len[Math.floor(Math.random()*len.length)];
 
-for (var i 
+for (var i = 0; i < quantity; i++) {
+  var randomItem = len[Math.floor(Math.random()*len.length)];
+  randomItem.classList.add("rotated");
+}
 
 console.log(randomItem);
