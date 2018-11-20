@@ -2,7 +2,10 @@
 
 body {
   display: flex;
-  height: calc(100vh - 316px);
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: auto;
   position: relative;
   padding: 8vw;
   border: 3vw solid #000;
@@ -12,8 +15,6 @@ body {
 body::after {
   content: "";
   position: absolute;
-  width: calc(100% - 200px);
-  height: calc(100% - 200px);
   margin: 0;
   box-shadow: inset 2px 2px 10px rgba(0, 0, 0, 1);
 }
