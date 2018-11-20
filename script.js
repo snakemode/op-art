@@ -10,5 +10,6 @@ console.log(quantity);
 
 var randomItem = len[Math.floor(Math.random()*len.length)];
 
+for (var i 
 
 console.log(randomItem);
