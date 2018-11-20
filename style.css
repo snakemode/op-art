@@ -26,9 +26,12 @@ body::after {
   background: repeating-linear-gradient(
   45deg,
   #fff,
-  #fff 10%,
-  #333 10%,
-  #333 20%
+  #fff 5%,
+  #333 5%,
+  #333 10%
 );
 }
 
+.rotated {
+  transform: rotate(90deg)
+}
