@@ -4,10 +4,14 @@ body {
   display: grid;
   border: 50px solid #000;
   padding: 100px;
-  box-shadow
+
 }
 
-div {
+body:after {
+  box-shadow: inset 10px 10px 10px #000;
+}
+
+.square {
   width: 200px;
   height: 200px;
   background: repeating-linear-gradient(
