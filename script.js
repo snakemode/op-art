@@ -5,7 +5,10 @@
 
 
 let len = document.getElementsByClassName("square");
+let quantity = Math.floor(Math.random() * len.length);
+console.log(quantity);
 
 var randomItem = len[Math.floor(Math.random()*len.length)];
+
 
 console.log(randomItem);
