@@ -21,7 +21,6 @@ body {
 }
 
 .square {
-  flex-shrink: 0;
   width: 100px;
   height: 100px;
   background: repeating-linear-gradient(

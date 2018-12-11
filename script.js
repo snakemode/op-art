@@ -14,14 +14,8 @@ let colHeight = Math.trunc((height - gap) / 100);
 let rowLen = Math.trunc((width - gap) / 100);
 let quantity = colHeight * rowLen;
 
-//let len = document.getElementsByClassName("square");
-//let quantity = Math.floor(Math.random() * len.length);
-console.log(quantity);
-
-
-holder.style.style.gridTemplateColumns = "repeat(" + colHeight + ", 1fr)";
-holder.style.style.gridTemplateRows = "repeat(" + rowLen + ", 1fr)";
-
+holder.style.gridTemplateColumns = "repeat(" + colHeight + ", 100px)";
+holder.style.gridTemplateRows = "repeat(" + rowLen + ", 100px)";
 
 for (var i = 0; i < quantity; i++) {
   let square = document.createElement('div');
