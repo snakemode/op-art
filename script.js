@@ -3,6 +3,15 @@
 
 // prints "hi" in the browser's dev tools console
 
+let body = document.body,
+    html = document.documentElement;
+
+let height = Math.max( body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight );
+let width = Math.max( body.scrollWidth, body.offsetWidth, html.clientWidth, html.scrollWidth, html.offsetWidth );
+let gap = width/100 * 24;
+let holder = document.getElementById("holder");
+
+console.log(gap);
 
 let len = document.getElementsByClassName("square");
 let quantity = Math.floor(Math.random() * len.length);
