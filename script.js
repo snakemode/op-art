@@ -14,7 +14,7 @@ let colHeight = Math.trunc((height - gap) / 100);
 let rowLen = Math.trunc((width - gap) / 100);
 let quantity = colHeight * rowLen;
  
-holder.style.padding = (height - (height/100 * 12 ) - (colHeight * 100))/2 + "px";
+holder.style.padding = (height - (height/100 * 14 ) - (colHeight * 100)) + "px";
 
 
 //let len = document.getElementsByClassName("square");
@@ -25,7 +25,6 @@ console.log(quantity);
 for (var i = 0; i < quantity; i++) {
   let square = document.createElement('div');
       square.className="square";
-  console.log('here', i);
   
  if (Math.random() >= 0.5) {
    square.classList.add("rotated");
