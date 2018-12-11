@@ -8,13 +8,13 @@ let body = document.body,
 
 let height = Math.max( body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight );
 let width = Math.max( body.scrollWidth, body.offsetWidth, html.clientWidth, html.scrollWidth, html.offsetWidth );
-let gap = width/100 * 24;
+let gap = width/100 * 28;
 let holder = document.getElementById("holder");
 let colHeight = Math.trunc((height - gap) / 100);
 let rowLen = Math.trunc((width - gap) / 100);
 let quantity = colHeight * rowLen;
-let square = document.createElement('div');
-    square.className="square";
+ holder.style.padding.top(width - (rowLen))
+
 
 //let len = document.getElementsByClassName("square");
 //let quantity = Math.floor(Math.random() * len.length);
@@ -22,6 +22,9 @@ console.log(quantity);
 
 
 for (var i = 0; i < quantity; i++) {
+  let square = document.createElement('div');
+      square.className="square";
+  console.log('here', i);
   holder.appendChild(square);
 }
 
