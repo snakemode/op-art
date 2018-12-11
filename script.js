@@ -13,9 +13,6 @@ let holder = document.getElementById("holder");
 let colHeight = Math.trunc((height - gap) / 100);
 let rowLen = Math.trunc((width - gap) / 100);
 let quantity = colHeight * rowLen;
- 
-holder.style.padding = (width - (width/100 * 12 ) - (rowLen * 100))/2 + "px";
-
 
 //let len = document.getElementsByClassName("square");
 //let quantity = Math.floor(Math.random() * len.length);
