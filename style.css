@@ -1,18 +1,20 @@
 /* CSS files add styling rules to your content */
 
-body {
+section {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  width: auto;
+  overflow: hidden;
+  width: 50vw;
+  height: 81vh;
   position: relative;
-  padding: 7.75vw;
+  padding: 8vw;
   border: 4vw solid #000;
   box-shadow: inset 5px 5px 20px rgba(0, 0, 0, 0.5);
 }
 
-body::after {
+section::after {
   content: "";
   position: absolute;
   margin: 0;
@@ -21,8 +23,8 @@ body::after {
 
 .square {
   flex-shrink: 0;
-  width: 8.5vw;
-  height: 8.5vw;
+  width: 100px;
+  height: 100px;
   background: repeating-linear-gradient(
   45deg,
   #fff,
