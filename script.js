@@ -19,6 +19,10 @@ let quantity = colHeight * rowLen;
 console.log(quantity);
 
 
+holder.style.style.gridTemplateColumns = "repeat(" + colHeight + ", 1fr)";
+holder.style.style.gridTemplateRows = "repeat(" + rowLen + ", 1fr)";
+
+
 for (var i = 0; i < quantity; i++) {
   let square = document.createElement('div');
       square.className="square";

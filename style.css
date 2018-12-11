@@ -17,12 +17,7 @@ body {
 }
 
 .art {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  position: relative;
+  display: grid;
 }
 
 .square {
