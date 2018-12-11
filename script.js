@@ -10,8 +10,9 @@ let height = Math.max( body.scrollHeight, body.offsetHeight, html.clientHeight, 
 let width = Math.max( body.scrollWidth, body.offsetWidth, html.clientWidth, html.scrollWidth, html.offsetWidth );
 let gap = width/100 * 24;
 let holder = document.getElementById("holder");
-
-console.log(gap);
+let colHeight = Math.trunc((height - gap) / 100);
+let rowLen = Math.trunc((width - gap) / 100);
+console.log(colHeight, rowLen);
 
 let len = document.getElementsByClassName("square");
 let quantity = Math.floor(Math.random() * len.length);
