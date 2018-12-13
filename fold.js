@@ -4,11 +4,11 @@ let body = document.body,
 let art = document.getElementById("art");
 
 let width = Math.max( art.scrollWidth, art.offsetWidth, art.clientWidth, art.scrollWidth, art.offsetWidth );
-let gap = width/100 * 28;
-let rowLen = Math.trunc((width - gap) / 100);
 let quantity = 500;
 
-console.log(width, gap, rowLen)
+let starter = 3;
+
+console.log(remainder);
 
 for (var i = 0; i < quantity; i++) {
   let square = document.createElement('div');
@@ -19,4 +19,4 @@ for (var i = 0; i < quantity; i++) {
 
 
 
-//console.log(Math.pow(4, 0.5));
+       
