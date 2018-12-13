@@ -9,7 +9,7 @@
 .art {
   display: grid;
   grid-template-rows: repeat(auto-fill, 40px);
-  grid-template-columns: repeat(2px, auto-fill,);
+
   
 }
 
