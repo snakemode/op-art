@@ -1,4 +1,3 @@
-/* CSS files add styling rules to your content */
 body {
   margin: 0;
 }
@@ -22,26 +21,3 @@ body {
   border-left: 10px solid #ccc;
 }
 
-.art {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 100px);
-  grid-template-rows: repeat(auto-fill, 100px);
-  justify-content: center;
- 
-}
-
-.square {
-  width: 100px;
-  height: 100px;
-  background: repeating-linear-gradient(
-  45deg,
-  #fff,
-  #fff 5%,
-  #333 5%,
-  #333 10%
-);
-}
-
-.rotated {
-  transform: rotate(90deg)
-}
