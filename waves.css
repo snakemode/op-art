@@ -1,21 +1,30 @@
+.art {
+    width: 65vw;
+    height: 55vh;
+}
+
 .holder {
-  /* Clip edges, as some of the lines don't terminate nicely. */
     overflow: hidden;
     position: relative;
     width: 200px;
     height: 50px;
+      transform: scale(2, 1);
+    transform-origin: left;
 }
 
-.ellipse {
+
+
+.circle {
     position: absolute;
-    background: radial-gradient(ellipse, transparent, transparent 7px, black 7px, black 10px, transparent 11px);
-    background-size: 36px 40px;
     width: 200px;
     height: 20px;
+    background: radial-gradient(16px, transparent, transparent 4px, black 4px, black 10px, transparent 11px);
+    background-size: 30px 40px;
 }
 
-.ellipse2 {
+.circle2 {
+    /* Offset to make squigglies line up */
     top: 20px;
-    left: 18px;
+    left: 15px;
     background-position: 0px -20px;
-}
+}s
