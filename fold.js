@@ -6,9 +6,9 @@ let squares = document.getElementsByClassName("square");
 
 let width = Math.max( art.scrollWidth, art.offsetWidth, art.clientWidth, art.scrollWidth, art.offsetWidth );
 
-for (var i = 1; i < 40; i++) {
+for (var i = 1; i < 7; i++) {
   console.log(squares[i]);
-  squares[i].style.width = 40 - i + "px";
+  squares[i].style.width = 40 - i*i + "px";
 }
 
 
