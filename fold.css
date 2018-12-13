@@ -8,13 +8,11 @@
 
 .art {
   display: grid;
-  grid-template-rows: repeat(auto-fill, 40px);
-
-  
+  grid-template-rows
 }
 
 .square {
-  width: 2px;
+  width: 40px;
   height: 40px;
   background-color: black;
 }
