@@ -10,10 +10,14 @@
   height: 100%;
   display: grid;
   justify-content: center;
- 
 }
 
 .square {
   width: 100px;
   height: 100px;
+  background-color: black;
+}
+
+.square:nth-child(even) {
+  background-color: white;
 }

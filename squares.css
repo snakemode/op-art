@@ -3,7 +3,6 @@
   grid-template-columns: repeat(auto-fill, 100px);
   grid-template-rows: repeat(auto-fill, 100px);
   justify-content: center;
- 
 }
 
 .square {
