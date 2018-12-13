@@ -4,22 +4,28 @@ body {
 }
 
 .frame {
-  background-color: black;
-  padding: 4vw;
+  display: inline-block;
+  border: 4vw solid black;
+  background-color: #f1f1f1;
   margin: 2vw;
   box-shadow: inset 5px 5px 20px rgba(0, 0, 0, 0.5);
 }
 
 .mount {
+  display: inline-block;
   background-color: white;
-  padding: 8vw;
+  margin: 8vw;
   box-shadow: inset 5px 5px 20px rgba(0, 0, 0, 0.5);
+  border-top: 10px solid #f3f3f3;
+  border-left: 10px solid #f2f2f2;
 }
 
 .art {
   display: grid;
   grid-template-columns: repeat(auto-fill, 100px);
   grid-template-rows: repeat(auto-fill, 100px);
+  justify-content: center;
+ 
 }
 
 .square {

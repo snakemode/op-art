@@ -1,8 +1,3 @@
-/* If you're feeling fancy you can add interactivity 
-    to your site with Javascript */
-
-// prints "hi" in the browser's dev tools console
-
 let body = document.body,
     html = document.documentElement;
 
@@ -15,9 +10,8 @@ let rowLen = Math.trunc((width - gap) / 100);
 let quantity = colHeight * rowLen;
 
 console.log(height, width, gap, colHeight, rowLen)
+holder.style.width = rowLen * 100 + "px"
 
-//holder.style.gridTemplateColumns = "repeat(" + rowLen + ", 100px)";
-//holder.style.gridTemplateRows = "repeat(" + colHeight + ", 100px)";
 
 for (var i = 0; i < quantity; i++) {
   let square = document.createElement('div');
