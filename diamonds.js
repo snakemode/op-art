@@ -1,6 +1,6 @@
-let ably = new Ably.Realtime('YOUR_API_KEY');
+let ably = new Ably.Realtime('UeZ7NA.1_lKNA:4Twl7lf-0ozS09kQ');
 let channelName = '[product:ably-tfl/tube]tube:northern:940GZZLUEUS:arrivals';
 let channel = ably.channels.get(channelName);
 channel.subscribe((msg) => {
-  /* station update in msg */
+ console.log(msg);
 });
