@@ -3,12 +3,14 @@
   grid-template-columns: repeat(auto-fill, 100px);
   grid-template-rows: repeat(auto-fill, 100px);
   justify-content: center;
+  overflow: hidden;
 }
 
 .square {
   width: 100px;
   height: 100px;
   background: tomato;
+  transform: skew(0, -40deg);
 }
 
 .not {

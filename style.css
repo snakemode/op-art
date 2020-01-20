@@ -21,3 +21,7 @@ body {
   border-left: 10px solid #ccc;
 }
 
+.art {
+  width: calc(100vw - 28vw - 20px);
+}
+
