@@ -1,7 +1,7 @@
 let ably = new Ably.Realtime('2L2RQA.8DEPlw:Oc37iQaXFFdvT-Zx');
-let channelName = '[product:ably-tfl/tube]tube:disruptions';
+let channelName = '[product:ably-tfl/tube]tube:northern:940GZZLUEUS:arrivals';
 let channel = ably.channels.get(channelName);
 channel.subscribe((msg) => {
- console.log('hello: ' + msg.data);
-
+  let data = JSON.stringify(msg.data);
+  console.log(data);
 });
