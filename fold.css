@@ -7,14 +7,15 @@
 }
 
 .art {
-  display: grid;
- grid-auto-flow: column;
+  display: flex;
+  align-items: stretch;
+  height: 100%;
   
 }
 
 .square {
   width: 40px;
-  height: 40px;
+  height: 100%;
   background-color: black;
 }
 
