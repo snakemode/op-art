@@ -24,3 +24,6 @@ function historyOpenWeather() {
   });
 }
        
+let squWidth = 40;
+
+let squares = document.getElementsByClass
