@@ -37,9 +37,10 @@ function historyOpenWeather() {
       }
       let recentMessage = resultPage.items[0];
       if(recentMessage) {
-        temp = (recentMessage.data.main.temp - 273.15).toFixed(2);
-        console.log(temp + '°C');
-        let pointer = recentMessage.data.main.tem
+        let temp = (recentMessage.data.main.temp - 273.15).toFixed(2);
+        
+        let pointer;
+        console.log(pointer);
       }
     });
   });
