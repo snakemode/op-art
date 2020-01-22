@@ -18,18 +18,29 @@ function historyOpenWeather() {
       }
       let recentMessage = resultPage.items[0];
       if(recentMessage) {
-        console.log((recentMessage.data.main.temp - 273.15 ).toFixed(2)+ '°C');
+      //  console.log((recentMessage.data.main.temp - 273.15 ).toFixed(2)+ '°C');
       }
     });
   });
 }
 
+function degToRad(degrees)
+{
+  var pi = Math.PI;
+  return degrees * (pi/180);
+}
+
+console.log(degToRad(45));
 
 function setWidth() {
      
   let squares = document.querySelectorAll('.square');
 
-  squares.forEach(el => el.width = 40 * math.element.dataset.squareno))
+
+  squares.forEach(el => {
+   // console.log(Math.sin(el.dataset.squareno));
+    el.style.width = 40 * Math.sin(degToRad(el.dataset.squareno)) + 'px'
+  });
 }
        
 let squWidth = 40;
