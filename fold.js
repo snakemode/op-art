@@ -23,7 +23,15 @@ function historyOpenWeather() {
     });
   });
 }
+
+
+function setWidth() {
+     
+  let squares = document.querySelectorAll('.square');
+
+  squares.forEach(element => console.log(element))
+}
        
 let squWidth = 40;
 
-let squares = document.getElementsByClass
+setWidth();
