@@ -1,4 +1,23 @@
-let ably = new Ably.Realtime('2L2RQA.NRr7ZQ:DddGQeHfnaZsHCv7');
+function degToRad(degrees)
+{
+  var pi = Math.PI;
+  return degrees * (pi/180);
+}
+
+function setWidth() {
+     
+  let squares = document.querySelectorAll('.square');
+
+  squares.forEach(el => {
+    el.style.width = 40 * Math.sin(degToRad(el.dataset.squareno)) + 'px'
+  });
+}
+       
+let squWidth = 40;
+
+setWidth();
+
+let ably = new Ably.Realtime('2L2RQA.NRr7ZQ:DddGQeHfnaZsHCv7'); //get your free api key here https://www.ably.io/
 
 let channelWeather = ably.channels.get('[product:ably-openweathermap/weather]weather:2643741');
 let newTemperature, weatherDesc;
@@ -18,27 +37,11 @@ function historyOpenWeather() {
       }
       let recentMessage = resultPage.items[0];
       if(recentMessage) {
-      //  console.log((recentMessage.data.main.temp - 273.15 ).toFixed(2)+ '°C');
+        temp = (recentMessage.data.main.temp - 273.15).toFixed(2);
+        console.log(temp + '°C');
+        let pointer = recentMessage.data.main.tem
       }
     });
   });
 }
 
-function degToRad(degrees)
-{
-  var pi = Math.PI;
-  return degrees * (pi/180);
-}
-
-function setWidth() {
-     
-  let squares = document.querySelectorAll('.square');
-
-  squares.forEach(el => {
-    el.style.width = 40 * Math.sin(degToRad(el.dataset.squareno)) + 'px'
-  });
-}
-       
-let squWidth = 40;
-
-setWidth();
