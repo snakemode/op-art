@@ -46,6 +46,7 @@ function historyOpenWeather() {
           position = (temp - 10) * 0.6
         }
         console.log(position);
+        document.getElementById('art').style.transform = "translate(" + position + "%, 0)";
       }
     });
   });
