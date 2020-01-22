@@ -30,15 +30,11 @@ function degToRad(degrees)
   return degrees * (pi/180);
 }
 
-console.log(degToRad(45));
-
 function setWidth() {
      
   let squares = document.querySelectorAll('.square');
 
-
   squares.forEach(el => {
-   // console.log(Math.sin(el.dataset.squareno));
     el.style.width = 40 * Math.sin(degToRad(el.dataset.squareno)) + 'px'
   });
 }

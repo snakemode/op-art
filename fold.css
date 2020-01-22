@@ -4,6 +4,7 @@
 
 .mount {
   height: 57vh;
+  position: relative;
 }
 
 .art {
@@ -21,4 +22,14 @@
 
 .square:nth-child(even) {
   background-color: white;
+}
+
+.rows {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: red;
+  mix-blend-mode: multiply;
+
 }
