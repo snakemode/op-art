@@ -37,10 +37,15 @@ function historyOpenWeather() {
       }
       let recentMessage = resultPage.items[0];
       if(recentMessage) {
+        let position = 0;
         let temp = (recentMessage.data.main.temp - 273.15).toFixed(2);
         
-        let pointer;
-        console.log(pointer);
+        if (temp >= 10) {
+          position = (temp - 10) * -0.6;
+        } else {
+          position = (temp - 10) * 0.6
+        }
+        console.log(position);
       }
     });
   });
