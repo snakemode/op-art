@@ -29,7 +29,7 @@ function setWidth() {
      
   let squares = document.querySelectorAll('.square');
 
-  squares.forEach(element => console.log(element))
+  squares.forEach(el => el.width = 40 * math.element.dataset.squareno))
 }
        
 let squWidth = 40;
