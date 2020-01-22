@@ -29,7 +29,8 @@
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: red;
-  mix-blend-mode: multiply;
+  background-image: linear-gradient(0deg, #ffffff 25%, #000000 25%, #000000 50%, #ffffff 50%, #ffffff 75%, #000000 75%, #000000 100%);
+  background-size: 160.00px 160.00px;
+  mix-blend-mode: difference;
 
 }
