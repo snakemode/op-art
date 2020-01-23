@@ -1,5 +1,5 @@
 let ably = new Ably.Realtime('2L2RQA.8DEPlw:Oc37iQaXFFdvT-Zx');
-let channelTfl = ably.channels.get('[product:ably-tfl/tube]tube:northern:940GZZLUEUS:arrivals');
+let channelTfl = ably.channels.get('[product:ably-tfl/tube]tube:940GZZLUEUS:arrivals');
 
 function subscribeTfl(name) {
     historyTfl();
@@ -16,6 +16,7 @@ function subscribeTfl(name) {
       let arrivalTime = new Date(arrival.ExpectedArrival).toLocaleTimeString();
     });
   }
+
   function historyTfl() {
     channelTfl.attach(function(err) {
       channelTfl.history({ untilAttach: true, limit: 1 }, function(err, resultPage) {
@@ -31,3 +32,5 @@ function subscribeTfl(name) {
       });
     });
   }
+
+subscribeTfl();
