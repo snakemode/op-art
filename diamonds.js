@@ -1,7 +1,16 @@
 let ably = new Ably.Realtime('2L2RQA.8DEPlw:Oc37iQaXFFdvT-Zx');
-let channelTfl = ably.channels.get('[product:ably-tfl/tube]tube:northern:940GZZLUKSX:arrivals');
+let northern = '[product:ably-tfl/tube]tube:northern:940GZZLUKSX:arrivals';
+let victoria = '[product:ably-tfl/tube]tube:victora:940GZZLUKSX:arrivals';
+let metropolitan = '[product:ably-tfl/tube]tube:metropolitan:940GZZLUKSX:arrivals';
+let metropolitan = '[product:ably-tfl/tube]tube:metropolitan:940GZZLUKSX:arrivals';
+let hammersmith-city = '[product:ably-tfl/tube]tube:hammersmith-city:940GZZLUKSX:arrivals';
+let metropolitan = '[product:ably-tfl/tube]tube:metropolitan:940GZZLUKSX:arrivals';
+let metropolitan = '[product:ably-tfl/tube]tube:metropolitan:940GZZLUKSX:arrivals';
 
-function subscribeTfl(name) {
+
+let channelTfl = ably.channels.get(victoria);
+
+function subscribeTfl(channel) {
     historyTfl();
     channelTfl.subscribe(function(msg) {
       updateTfl(msg.data);
