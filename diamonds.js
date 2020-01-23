@@ -11,7 +11,7 @@ function updateTfl(arrivals) {
   });
 }
 
-function onSubscriptionData(i, i2) {
+function onSubscriptionData(message) {
  console.log("Some subscription data appeared"); 
 }
 
@@ -39,7 +39,7 @@ function subscribeTfl(channelName, onSubscriptionData) {
         }          
       });
       
-      // channelTfl.subscribe(onSubscriptionData);
+      channelTfl.subscribe(onSubscriptionData);
     });
 
     console.log("Subscribing to " + channel);      
@@ -66,10 +66,13 @@ async function asyncMain() {
   ];
   
   const items = await Promise.all(subscriptionPromises);
-  const allTrains = items.flat().sort(byArrivalTime);
-  console.log(allTrains.length);
   
-  console.log(allTrains[0]);
+  const selectedTrains = [];
+  for(let collection of items) {
+    selectedTrains.push(collection.slice(0, 5));
+  }  
+  
+  const allTrains = selectedTrains.sort(byArrivalTime);  
   
   allTrains.forEach((train, i) => {
     let square = document.createElement('div');
