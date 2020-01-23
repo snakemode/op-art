@@ -1,17 +1,16 @@
 let ably = new Ably.Realtime('2L2RQA.8DEPlw:Oc37iQaXFFdvT-Zx');
 let northern = '[product:ably-tfl/tube]tube:northern:940GZZLUKSX:arrivals';
-let victoria = '[product:ably-tfl/tube]tube:victora:940GZZLUKSX:arrivals';
+let victoria = '[product:ably-tfl/tube]tube:victoria:940GZZLUKSX:arrivals';
 let metropolitan = '[product:ably-tfl/tube]tube:metropolitan:940GZZLUKSX:arrivals';
-let metropolitan = '[product:ably-tfl/tube]tube:metropolitan:940GZZLUKSX:arrivals';
-let hammersmith-city = '[product:ably-tfl/tube]tube:hammersmith-city:940GZZLUKSX:arrivals';
-let metropolitan = '[product:ably-tfl/tube]tube:metropolitan:940GZZLUKSX:arrivals';
-let metropolitan = '[product:ably-tfl/tube]tube:metropolitan:940GZZLUKSX:arrivals';
+let piccadilly = '[product:ably-tfl/tube]tube:piccadilly:940GZZLUKSX:arrivals';
+let hammersmith = '[product:ably-tfl/tube]tube:hammersmith-city:940GZZLUKSX:arrivals';
+let circle = '[product:ably-tfl/tube]tube:circle:940GZZLUKSX:arrivals';
 
-
-let channelTfl = ably.channels.get(victoria);
 
 function subscribeTfl(channel) {
-    historyTfl();
+  let channelTfl = ably.channels.get(channel);
+
+    historyTfl(channel);
     channelTfl.subscribe(function(msg) {
       updateTfl(msg.data);
       console.log('live: ', msg.data)
@@ -26,7 +25,9 @@ function subscribeTfl(channel) {
     });
   }
 
-  function historyTfl() {
+  function historyTfl(channel) {
+    let channelTfl = ably.channels.get(channel);
+
     channelTfl.attach(function(err) {
       channelTfl.history({ untilAttach: true, limit: 1 }, function(err, resultPage) {
         if(err){
@@ -42,4 +43,9 @@ function subscribeTfl(channel) {
     });
   }
 
-subscribeTfl();
+subscribeTfl(northern);
+subscribeTfl(victoria);
+subscribeTfl(metropolitan);
+subscribeTfl(piccadilly);
+subscribeTfl(hammersmith);
+subscribeTfl(circle);
