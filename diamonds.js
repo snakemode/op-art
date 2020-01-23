@@ -1,6 +1,8 @@
 let ably = new Ably.Realtime('2L2RQA.8DEPlw:Oc37iQaXFFdvT-Zx');
 let trains = {};
 let ordered = {};
+let container = document.getElementById('art');
+  
 
 function updateTfl(arrivals) {
   arrivals = arrivals.reverse();
@@ -23,7 +25,7 @@ function subscribeTfl(channelName, onSubscriptionData) {
       channelTfl.history({ untilAttach: true, limit: 1 }, function(err, resultPage) {
         console.log("History retrieved for " + channelName); 
         
-        if(err) {
+        if (err) {
             reject(err);
             return;
         }
@@ -44,7 +46,7 @@ function subscribeTfl(channelName, onSubscriptionData) {
   }); 
 }
 
-function sortByArrivalTime(i1, i2) {
+function byArrivalTime(i1, i2) {
     if(i1.ExpectedArrival < i2.ExpectedArrival) {
       return -1;
     } else if(i1.ExpectedArrival > i2.ExpectedArrival) {
@@ -53,11 +55,7 @@ function sortByArrivalTime(i1, i2) {
     return 0;
 }
 
-async function subscribeAll() {
-  console.log("Starting");
-  
-  let allTrains = [];
-  
+async function asyncMain() {
   const subscriptionPromises = [
     subscribeTfl("northern"),
     subscribeTfl("victoria"),
@@ -68,14 +66,21 @@ async function subscribeAll() {
   ];
   
   const items = await Promise.all(subscriptionPromises);
-  allTrains.push(...items.flat());
+  const allTrains = items.flat().sort(byArrivalTime);
+  console.log(allTrains.length);
   
-  const orderedTrains = allTrains.sort(sortByArrivalTime);
-  
-  orderedTrains.forEach(() => {
+  allTrains.forEach((train, i) => {
+    let square = document.createElement('div');
+    square.className="square " + train.LineId;
+
+    container.appendChild(square);
+    console.log(`train.ExpectedArrival);
+    
+    /*
+    You are a ghost in the machine <3 <3 <3
+    */
   });
-  console.log(JSON.stringify(orderedTrains));
+  //console.log(JSON.stringify(allTrains));
 }
 
-subscribeAll()
-
+asyncMain();

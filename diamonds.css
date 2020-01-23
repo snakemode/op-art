@@ -3,27 +3,28 @@
   --metropolitan: #840b55;
   --circle: #ffcd00;
   --victoria: #01a3e0;
-  --picadilly: #10069f;
+  --piccadilly: #10069f;
   --hammersmith: #e89cae;
 }
 
+
 .art {
   display: grid;
-  grid-template-columns: repeat(auto-fill, 100px);
-  grid-template-rows: repeat(auto-fill, 100px);
+  grid-template-columns: repeat(auto-fill, 60px);
+  grid-template-rows: repeat(auto-fill, 60px);
   justify-content: center;
   overflow: hidden;
 }
 
 .square {
-  width: 100px;
-  height: 100px;
+  width: 60px;
+  height: 60px;
   background: tomato;
   transform: skew(0, -40deg);
 }
 
-.not {
-  background: white;
+.northern {
+  background-color: var(--northern);
 }
 
 .metropolitan {
@@ -38,10 +39,10 @@
   background-color: var(--victoria);
 }
 
-.picadilly {
-  background-color: var(--picadilly);
+.piccadilly {
+  background-color: var(--piccadilly);
 }
 
-.hammersmith {
+.hammersmith-city {
   background-color: var(--hammersmith);
 }
