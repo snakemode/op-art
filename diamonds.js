@@ -11,46 +11,51 @@ let ordered = {};
 
 function subscribeTfl(channel) {
   let channelTfl = ably.channels.get(channel);
+  
+  historyTfl(channel);
+  channelTfl.subscribe(function(msg) {
+    updateTfl(msg.data);
+  });
+}
 
-    historyTfl(channel);
-    channelTfl.subscribe(function(msg) {
-      updateTfl(msg.data);
-    });
-  }
+function updateTfl(arrivals) {
+  arrivals = arrivals.reverse();
 
-  function updateTfl(arrivals) {
-    arrivals = arrivals.reverse();
- 
-    arrivals.forEach((arrival) => {
-      let arrivalTime = new Date(arrival.ExpectedArrival).toLocaleTimeString();
-    });
-  }
+  arrivals.forEach((arrival) => {
+    let arrivalTime = new Date(arrival.ExpectedArrival).toLocaleTimeString();
+  });
+}
 
-  function historyTfl(channel) {
-    let channelTfl = ably.channels.get(channel);
+function historyTfl(channel) {
+  let channelTfl = ably.channels.get(channel);
 
-    channelTfl.attach(function(err) {
-      channelTfl.history({ untilAttach: true, limit: 1 }, function(err, resultPage) {
-        if(err){
-            console.log(err)
-            return
-        }
-        let recentMessage = resultPage.items[0];
-        if(recentMessage) {
-          updateTfl(recentMessage.data);
-          recentMessage.data.forEach((train) => {
-            let arrival = train.ExpectedArrival;
-            let line = train.LineId;
-            trains[arrival] = line;
+  channelTfl.attach(function(err) {
+    channelTfl.history({ untilAttach: true, limit: 1 }, function(err, resultPage) {
+      if(err){
+          console.log(err)
+          return
+      }
+      
+      let recentMessage = resultPage.items[0];
+      
+      if(recentMessage) {
+        updateTfl(recentMessage.data);
+        recentMessage.data.forEach((train, index, array) => {
+          let arrival = train.ExpectedArrival;
+          let line = train.LineId;
+          trains[arrival] = line;
+          asyncFunction(train, () => {
+            itemsProcessed++;
+            if(itemsProcessed === array.length) {
+              callback();
+            }
           });
-          Object.keys(trains).sort().forEach(function(key) {
-            ordered[key] = trains[key];
-          });
-          console.log(trains);
-        }
-      });
+        });
+        orderTrains(trains);
+      }
     });
-  }
+  });
+}
 
 subscribeTfl(northern);
 subscribeTfl(victoria);
@@ -59,3 +64,28 @@ subscribeTfl(piccadilly);
 subscribeTfl(hammersmith);
 subscribeTfl(circle);
 
+function orderTrains(unordered) {
+  
+  const ordered = {};
+  Object.keys(unordered).sort().forEach(function(key) {
+    ordered[key] = unordered[key];
+  });
+
+  console.log(JSON.stringify(ordered));
+}
+
+
+
+
+function callback () { console.log('all done'); }
+
+var itemsProcessed = 0;
+
+[1, 2, 3].forEach((item, index, array) => {
+  asyncFunction(item, () => {
+    itemsProcessed++;
+    if(itemsProcessed === array.length) {
+      callback();
+    }
+  });
+});
