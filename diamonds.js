@@ -1,5 +1,5 @@
 let ably = new Ably.Realtime('2L2RQA.8DEPlw:Oc37iQaXFFdvT-Zx');
-let channelTfl = ably.channels.get('[product:ably-tfl/tube]tube:940GZZLUEUS:arrivals');
+let channelTfl = ably.channels.get('[product:ably-tfl/tube]tube:northern:940GZZLUKSX:arrivals');
 
 function subscribeTfl(name) {
     historyTfl();
