@@ -1,3 +1,5 @@
+console.log("here")
+
 let ably = new Ably.Realtime('2L2RQA.8DEPlw:Oc37iQaXFFdvT-Zx');
 let northern = '[product:ably-tfl/tube]tube:northern:940GZZLUKSX:arrivals';
 let victoria = '[product:ably-tfl/tube]tube:victoria:940GZZLUKSX:arrivals';
@@ -8,8 +10,8 @@ let circle = '[product:ably-tfl/tube]tube:circle:940GZZLUKSX:arrivals';
 
 let trains = {};
 let ordered = {};
-
-function subscribeTfl(channel) {
+console.log("Hi")
+async function subscribeTfl(channel) {
   let channelTfl = ably.channels.get(channel);
   
   historyTfl(channel);
@@ -51,12 +53,20 @@ function historyTfl(channel) {
   });
 }
 
-subscribeTfl(northern);
-subscribeTfl(victoria);
-subscribeTfl(metropolitan);
-subscribeTfl(piccadilly);
-subscribeTfl(hammersmith);
-subscribeTfl(circle);
+async function subscribeAll() {
+  console.log("Starting");
+  
+  await new Promise(resolve => subscribeTfl(northern));
+  await new Promise(resolve => subscribeTfl(victoria));
+  await new Promise(resolve => subscribeTfl(metropolitan));
+  await new Promise(resolve => subscribeTfl(piccadilly));
+  await new Promise(resolve => subscribeTfl(hammersmith));
+  await new Promise(resolve => subscribeTfl(circle));
+  
+  console.log("Everything is now subscribed");
+}
+
+subscribeAll()
 
 function orderTrains(unordered) {
   
