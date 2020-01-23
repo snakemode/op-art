@@ -9,19 +9,6 @@ let circle = '[product:ably-tfl/tube]tube:circle:940GZZLUKSX:arrivals';
 let trains = {};
 let ordered = {};
 
-function subscribeTfl(channel) {  
-    return new Promise(resolve => { 
-      
-      let channelTfl = ably.channels.get(channel);
-      historyTfl(channel);
-      
-      channelTfl.subscribe(function(msg) {
-        resolve(msg.data);
-      });      
-    }, reject => {
-      console.log("Failed to subscribe!");
-    }); 
-}
 
 function updateTfl(arrivals) {
   arrivals = arrivals.reverse();
@@ -31,52 +18,60 @@ function updateTfl(arrivals) {
   });
 }
 
-function historyTfl(channel) {
-  let channelTfl = ably.channels.get(channel);
+function historyTfl(channel, resolve, reject) {
 
-  channelTfl.attach(function(err) {
-    channelTfl.history({ untilAttach: true, limit: 1 }, function(err, resultPage) {
-      if(err){
-          console.log(err)
-          return
-      }
+}
+
+function subscribeTfl(channel) {  
+    return new Promise((resolve, reject) => { 
       
-      let recentMessage = resultPage.items[0];
+      let channelTfl = ably.channels.get(channel);
+     
+      channelTfl.subscribe(function(msg) {
+        console.log(msg.data);
+      });
       
-      if(recentMessage) {
-        updateTfl(recentMessage.data);
-        recentMessage.data.forEach((train, index, array) => {
-          let arrival = train.ExpectedArrival;
-          let line = train.LineId;
-          trains[arrival] = line;
+      channelTfl.attach(function(err) {
+        channelTfl.history({ untilAttach: true, limit: 1 }, function(err, resultPage) {
+          if(err){
+              reject(err);
+              return
+          }      
+          resolve(resultPage);
         });
-        orderTrains(trains);
-      }
-    });
-  });
+      });
+      
+      console.log("Subscribed to " + channel);      
+    }); 
 }
 
 async function subscribeAll() {
   console.log("Starting");
   
+  let allTrains = [];
   
+  allTrains.push(await subscribeTfl(northern));
+  allTrains.push(await subscribeTfl(victoria));
+  allTrains.push(await subscribeTfl(metropolitan));
+  allTrains.push(await subscribeTfl(piccadilly));
+  allTrains.push(await subscribeTfl(hammersmith));
+  allTrains.push(await subscribeTfl(circle);
+  
+     /*   let recentMessage = resultPage.items[0];
 
-  await new Promise(resolve => { 
-      let channelTfl = ably.channels.get(northern);
-      //historyTfl(northern);
-      channelTfl.subscribe(function(msg) {
-        console.log("sbubing");
-        resolve(msg.data);
-      });    
-  });
-  
-  console.log("hi2");
-  
-  await new Promise(resolve => subscribeTfl(victoria));
-  await new Promise(resolve => subscribeTfl(metropolitan));
-  await new Promise(resolve => subscribeTfl(piccadilly));
-  await new Promise(resolve => subscribeTfl(hammersmith));
-  await new Promise(resolve => subscribeTfl(circle));
+    if(recentMessage) {
+      updateTfl(recentMessage.data);
+      recentMessage.data.forEach((train, index, array) => {
+        let arrival = train.ExpectedArrival;
+        let line = train.LineId;
+        trains[arrival] = line;
+      });
+
+      resolve(trains);
+      //orderTrains(trains);
+    }
+
+    resolve([]);*/
   
   console.log("Everything is now subscribed");
 }
