@@ -19,7 +19,7 @@ h1 {
 h1:before, h1:after {
   content: "";
   position: absolute;
-  left: 5px;
+  left: 7px;
   top: 50%;
   width: 7px;
   height: 7px;
@@ -31,7 +31,7 @@ h1:before, h1:after {
 
 h1:after {
   left: auto;
-  right: 5px;
+  right: 7px;
 }
 
 .frame {
