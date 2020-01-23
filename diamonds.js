@@ -6,6 +6,7 @@ let piccadilly = '[product:ably-tfl/tube]tube:piccadilly:940GZZLUKSX:arrivals';
 let hammersmith = '[product:ably-tfl/tube]tube:hammersmith-city:940GZZLUKSX:arrivals';
 let circle = '[product:ably-tfl/tube]tube:circle:940GZZLUKSX:arrivals';
 
+let data = {}
 
 function subscribeTfl(channel) {
   let channelTfl = ably.channels.get(channel);
@@ -13,7 +14,6 @@ function subscribeTfl(channel) {
     historyTfl(channel);
     channelTfl.subscribe(function(msg) {
       updateTfl(msg.data);
-      console.log('live: ', msg.data)
     });
   }
 
@@ -36,8 +36,13 @@ function subscribeTfl(channel) {
         }
         let recentMessage = resultPage.items[0];
         if(recentMessage) {
+          let trains = {}
           updateTfl(recentMessage.data);
-          console.log('recent: ', recentMessage.data);
+          recentMessage.data.forEach((train) => {
+            
+            console.log(train.ExpectedArrival, train.LineId)
+          });
+          //console.log('recent: ', recentMessage.data);
         }
       });
     });
