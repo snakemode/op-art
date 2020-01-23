@@ -9,15 +9,14 @@
 
 
 .art {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 10%);
-  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
   overflow: hidden;
 }
 
 .square {
-  width: 100%;
-  height: 83px;
+  width: 10%;
+  height: 6vw;
   background: tomato;
   transform: skew(0, -40deg);
 }
