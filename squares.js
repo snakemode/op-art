@@ -12,23 +12,17 @@ let quantity = colHeight * rowLen;
 holder.style.width = rowLen * 100 + "px"
 
 
-for (var i = 0; i < quantity; i++) {
-  let square = document.createElement('div');
-      square.className="square";
-
-  
- if (Math.random() >= 0.5) {
-   square.classList.add("rotated");
- }
-  
-  holder.appendChild(square);
-}
-
 let ably = new Ably.Realtime('2L2RQA.NRr7ZQ:DddGQeHfnaZsHCv7'); //get your free api key here https://www.ably.io/
 
 var channel = ably.channels.get('[product:ably-bitflyer/bitcoin]bitcoin:jpy');
 
-channel.subscribe(function(message) {
-  console.log(message.data);
+channel.subscribe((message) => {
+  return message.data.price;
 });
 
+for (var i = 0; i < quantity; i++) {
+  let square = document.createElement('div');
+      square.className="square";
+  
+  holder.appendChild(square);
+}
