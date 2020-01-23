@@ -41,11 +41,10 @@ function historyOpenWeather() {
         let temp = (recentMessage.data.main.temp - 273.15).toFixed(2);
         
         if (temp >= 10) {
-          position = (temp - 10) * -0.6;
+          position = (temp - 10) * -0.6 -50;
         } else {
-          position = (temp - 10) * 0.6
+          position = (temp - 10) * 0.6 - 50;
         }
-        console.log(position);
         document.getElementById('art').style.transform = "translate(" + position + "%, 0)";
       }
     });
