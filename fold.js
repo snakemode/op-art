@@ -22,10 +22,8 @@ let ably = new Ably.Realtime('2L2RQA.NRr7ZQ:DddGQeHfnaZsHCv7'); //get your free 
 let channelWeather = ably.channels.get('[product:ably-openweathermap/weather]weather:2643741');
 let newTemperature, weatherDesc;
 historyOpenWeather();
-//subscribing to updates in the weather data
 channelWeather.subscribe((msg) => {
   console.log(msg);
-    
 });
 
 function historyOpenWeather() {
