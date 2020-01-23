@@ -10,17 +10,18 @@ function updateTfl(arrivals) {
   });
 }
 
-function onAttach(resolve, reject) {
-  
-}
-
 function subscribeTfl(channelName, onSubscriptionData) {
   const channel = `[product:ably-tfl/tube]tube:${channelName}:940GZZLUKSX:arrivals`;
+  let channelTfl = ably.channels.get(channel);
 
   return new Promise((resolve, reject) => { 
-    let channelTfl = ably.channels.get(channel);
-
+    
     channelTfl.attach(function(err) {
+      if (err) {
+          reject(err);
+          return;
+      }
+      
       channelTfl.history({ untilAttach: true, limit: 1 }, function(err, resultPage) {
         console.log("History retrieved for " + channelName); 
         
@@ -56,7 +57,8 @@ function byArrivalTime(i1, i2) {
     return 0;
 }
 
-async function asyncMain() {
+async function asyncMain() { 
+  
   const subscriptionPromises = [
     subscribeTfl("northern"),
     subscribeTfl("victoria"),
