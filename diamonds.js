@@ -1,5 +1,3 @@
-console.log("here")
-
 let ably = new Ably.Realtime('2L2RQA.8DEPlw:Oc37iQaXFFdvT-Zx');
 let northern = '[product:ably-tfl/tube]tube:northern:940GZZLUKSX:arrivals';
 let victoria = '[product:ably-tfl/tube]tube:victoria:940GZZLUKSX:arrivals';
@@ -10,14 +8,19 @@ let circle = '[product:ably-tfl/tube]tube:circle:940GZZLUKSX:arrivals';
 
 let trains = {};
 let ordered = {};
-console.log("Hi")
-async function subscribeTfl(channel) {
-  let channelTfl = ably.channels.get(channel);
-  
-  historyTfl(channel);
-  channelTfl.subscribe(function(msg) {
-    updateTfl(msg.data);
-  });
+
+function subscribeTfl(channel) {  
+    return new Promise(resolve => { 
+      
+      let channelTfl = ably.channels.get(channel);
+      historyTfl(channel);
+      
+      channelTfl.subscribe(function(msg) {
+        resolve(msg.data);
+      });      
+    }, reject => {
+      console.log("Failed to subscribe!");
+    }); 
 }
 
 function updateTfl(arrivals) {
@@ -56,7 +59,19 @@ function historyTfl(channel) {
 async function subscribeAll() {
   console.log("Starting");
   
-  await new Promise(resolve => subscribeTfl(northern));
+  
+
+  await new Promise(resolve => { 
+      let channelTfl = ably.channels.get(northern);
+      //historyTfl(northern);
+      channelTfl.subscribe(function(msg) {
+        console.log("sbubing");
+        resolve(msg.data);
+      });    
+  });
+  
+  console.log("hi2");
+  
   await new Promise(resolve => subscribeTfl(victoria));
   await new Promise(resolve => subscribeTfl(metropolitan));
   await new Promise(resolve => subscribeTfl(piccadilly));
