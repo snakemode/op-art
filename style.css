@@ -3,7 +3,6 @@ body {
 }
 
 .frame {
-  display: inline-block;
   border: 4vw solid black;
   background-color: #eee;
   margin: 2vw;
@@ -11,7 +10,6 @@ body {
 }
 
 .mount {
-  display: inline-block;
   background-color: white;
   margin: 8vw;
   box-shadow: inset 5px 5px 20px rgba(0, 0, 0, 0.5);
