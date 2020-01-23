@@ -36,8 +36,15 @@ function subscribeTfl(channel) {
           if(err){
               reject(err);
               return
-          }      
-          resolve(resultPage);
+          }
+          
+          let recentMessage = resultPage.items[0];
+          
+          if(recentMessage) {            
+            resolve(resultPage.items[0].data);
+          } else { 
+            resolve([]);
+          }          
         });
       });
       
@@ -50,28 +57,23 @@ async function subscribeAll() {
   
   let allTrains = [];
   
-  allTrains.push(await subscribeTfl(northern));
-  allTrains.push(await subscribeTfl(victoria));
-  allTrains.push(await subscribeTfl(metropolitan));
-  allTrains.push(await subscribeTfl(piccadilly));
-  allTrains.push(await subscribeTfl(hammersmith));
-  allTrains.push(await subscribeTfl(circle);
+  allTrains.push(... await subscribeTfl(northern));
+  allTrains.push(... await subscribeTfl(victoria));
+  allTrains.push(... await subscribeTfl(metropolitan));
+  allTrains.push(... await subscribeTfl(piccadilly));
+  allTrains.push(... await subscribeTfl(hammersmith));
+  allTrains.push(... await subscribeTfl(circle));
   
-     /*   let recentMessage = resultPage.items[0];
-
-    if(recentMessage) {
-      updateTfl(recentMessage.data);
-      recentMessage.data.forEach((train, index, array) => {
-        let arrival = train.ExpectedArrival;
-        let line = train.LineId;
-        trains[arrival] = line;
-      });
-
-      resolve(trains);
-      //orderTrains(trains);
-    }
-
-    resolve([]);*/
+  console.log(allTrains.length);
+  
+  allTrains.forEach(train => {
+    console.log(train);
+    /*trainSet.forEach(train => {
+      console.log(train);
+    });  */  
+  });
+  
+  // call Order trains here? Merge all the different sets?
   
   console.log("Everything is now subscribed");
 }
