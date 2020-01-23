@@ -10,41 +10,35 @@ function updateTfl(arrivals) {
   });
 }
 
-function subscribeTfl(channelName, onSubscriptionData) {
+function onSubscriptionMessage(data) {
+  console.log(data); 
+}
+
+async function subscribeTfl(channelName, onSubscriptionData) {
   const channel = `[product:ably-tfl/tube]tube:${channelName}:940GZZLUKSX:arrivals`;
   let channelTfl = ably.channels.get(channel);
-
-  return new Promise((resolve, reject) => { 
+  
+  return new Promise(async (resolve, reject) => {     
+    console.log("Subscribing to " + channel);
     
-    channelTfl.attach(function(err) {
-      if (err) {
-          reject(err);
-          return;
-      }
+    await channelTfl.attach();
+
+    
       
-      channelTfl.history({ untilAttach: true, limit: 1 }, function(err, resultPage) {
+      channelTfl.history({ untilAttach: true, limit: 1 }, (err2, resultPage) => {
         console.log("History retrieved for " + channelName); 
         
-        if (err) {
-            reject(err);
+        if (err2) {
+            reject(err2);
             return;
         }
 
-        let recentMessage = resultPage.items[0];
-
-        if(recentMessage) {            
-          resolve(resultPage.items[0].data);
-        } else { 
-          resolve([]);
-        }          
+        let recentMessage = resultPage.items[0] || { data: [] };   
+        resolve(recentMessage.data);        
       });
       
-      channelTfl.subscribe((msg) => {
-        console.log(msg);
-      });
-    });
-
-    console.log("Subscribing to " + channel);      
+      channelTfl.subscribe(onSubscriptionMessage);
+   
   }); 
 }
 
@@ -81,9 +75,9 @@ async function asyncMain() {
   allTrains.forEach((train, i) => {
     let square = document.createElement('div');
     square.className="square " + train.LineId;
-
     container.appendChild(square);
-    console.log(`${train.ExpectedArrival} - ${train.LineId} - ${train.CurrentLocation}`);
+    
+    // console.log(`${train.ExpectedArrival} - ${train.LineId} - ${train.CurrentLocation}`);
     
     /*
     You are a ghost in the machine <3 <3 <3
