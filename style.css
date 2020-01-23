@@ -10,6 +10,7 @@ body {
 }
 
 .mount {
+  display: block;
   background-color: white;
   margin: 8vw;
   box-shadow: inset 5px 5px 20px rgba(0, 0, 0, 0.5);

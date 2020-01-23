@@ -1,15 +1,14 @@
-.frame, .mount {
-  display:block;
-}
-
 .mount {
   height: 57vh;
+  position: relative;
   overflow: hidden;
+  box-shadow: none;
 }
 
 .art {
   display: flex;
   align-items: stretch;
+  overflow: hidden;
   height: 100%;
   transition: all 0.5s ease-in-out;
   
@@ -19,6 +18,7 @@
   width: 40px;
   height: 100%;
   background-color: black;
+  flex-shrink: 0;
 }
 
 .square:nth-child(even) {
@@ -33,4 +33,5 @@
   background-image: linear-gradient(0deg, #ffffff 25%, #000000 25%, #000000 50%, #ffffff 50%, #ffffff 75%, #000000 75%, #000000 100%);
   background-size: 160.00px 160.00px;
   mix-blend-mode: difference;
+  box-shadow: inset -10px 10px 5px -10px rgba(0,0,0,0.75);
 }
