@@ -7,11 +7,21 @@
   --hammersmith: #e89cae;
 }
 
+.frame {
+  max-height: 80vh;
+}
+
+.mount {
+  overflow: hidden;
+}
 
 .art {
   display: flex;
   flex-wrap: wrap;
   overflow: hidden;
+  height: calc(80vh - 200px);
+  max-height: 660px;
+  margin: -3vw 0;
 }
 
 .square {

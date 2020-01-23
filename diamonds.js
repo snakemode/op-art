@@ -2,7 +2,6 @@ let ably = new Ably.Realtime('2L2RQA.8DEPlw:Oc37iQaXFFdvT-Zx');
 let trains = {};
 let ordered = {};
 let container = document.getElementById('art');
-  
 
 function updateTfl(arrivals) {
   arrivals = arrivals.reverse();
@@ -11,14 +10,8 @@ function updateTfl(arrivals) {
   });
 }
 
-const subsListener = {
-  apply(msg) {
-    console.log("apply");
-  }
-}
-
-function onSubscriptionData(message) {
- console.log("Some subscription data appeared"); 
+function onAttach(resolve, reject) {
+  
 }
 
 function subscribeTfl(channelName, onSubscriptionData) {
@@ -45,7 +38,9 @@ function subscribeTfl(channelName, onSubscriptionData) {
         }          
       });
       
-      channelTfl.subscribe(subsListener);
+      channelTfl.subscribe((msg) => {
+        console.log(msg);
+      });
     });
 
     console.log("Subscribing to " + channel);      
@@ -75,7 +70,7 @@ async function asyncMain() {
   
   const selectedTrains = [];
   for(let collection of items) {
-    const subset = collection.sort(byArrivalTime).slice(0, 10);
+    const subset = collection.slice(1, 20);
     selectedTrains.push(...subset);
   }
   
