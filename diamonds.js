@@ -44,12 +44,6 @@ function historyTfl(channel) {
           let arrival = train.ExpectedArrival;
           let line = train.LineId;
           trains[arrival] = line;
-          asyncFunction(train, () => {
-            itemsProcessed++;
-            if(itemsProcessed === array.length) {
-              callback();
-            }
-          });
         });
         orderTrains(trains);
       }
@@ -73,19 +67,3 @@ function orderTrains(unordered) {
 
   console.log(JSON.stringify(ordered));
 }
-
-
-
-
-function callback () { console.log('all done'); }
-
-var itemsProcessed = 0;
-
-[1, 2, 3].forEach((item, index, array) => {
-  asyncFunction(item, () => {
-    itemsProcessed++;
-    if(itemsProcessed === array.length) {
-      callback();
-    }
-  });
-});
