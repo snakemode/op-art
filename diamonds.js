@@ -36,11 +36,14 @@ function subscribeTfl(channel) {
         }
         let recentMessage = resultPage.items[0];
         if(recentMessage) {
-          let trains = {}
+          let trains = {};
           updateTfl(recentMessage.data);
           recentMessage.data.forEach((train) => {
-            
-            console.log(train.ExpectedArrival, train.LineId)
+            let arrival = train.ExpectedArrival;
+            let id = train.LineId;
+            let obj['arrival'] = id;
+            trains = obj.push();
+            console.log(trains)
           });
           //console.log('recent: ', recentMessage.data);
         }
@@ -54,3 +57,5 @@ subscribeTfl(metropolitan);
 subscribeTfl(piccadilly);
 subscribeTfl(hammersmith);
 subscribeTfl(circle);
+
+//array.sort(function(a,b){return a.getTime() - b.getTime()});
