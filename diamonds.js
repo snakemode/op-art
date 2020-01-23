@@ -6,7 +6,8 @@ let piccadilly = '[product:ably-tfl/tube]tube:piccadilly:940GZZLUKSX:arrivals';
 let hammersmith = '[product:ably-tfl/tube]tube:hammersmith-city:940GZZLUKSX:arrivals';
 let circle = '[product:ably-tfl/tube]tube:circle:940GZZLUKSX:arrivals';
 
-let data = {}
+let trains = {};
+let ordered = {};
 
 function subscribeTfl(channel) {
   let channelTfl = ably.channels.get(channel);
@@ -36,16 +37,16 @@ function subscribeTfl(channel) {
         }
         let recentMessage = resultPage.items[0];
         if(recentMessage) {
-          let trains = {};
           updateTfl(recentMessage.data);
           recentMessage.data.forEach((train) => {
             let arrival = train.ExpectedArrival;
-            let id = train.LineId;
-            let obj['arrival'] = id;
-            trains = obj.push();
-            console.log(trains)
+            let line = train.LineId;
+            trains[arrival] = line;
           });
-          //console.log('recent: ', recentMessage.data);
+          Object.keys(trains).sort().forEach(function(key) {
+            ordered[key] = trains[key];
+          });
+          console.log(trains);
         }
       });
     });
@@ -58,4 +59,3 @@ subscribeTfl(piccadilly);
 subscribeTfl(hammersmith);
 subscribeTfl(circle);
 
-//array.sort(function(a,b){return a.getTime() - b.getTime()});
