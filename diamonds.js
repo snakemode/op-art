@@ -17,14 +17,12 @@ function onSubscriptionMessage(data) {
 async function subscribeTfl(channelName, onSubscriptionData) {
   const channel = `[product:ably-tfl/tube]tube:${channelName}:940GZZLUKSX:arrivals`;
   let channelTfl = ably.channels.get(channel);
+  await channelTfl.attach();
   
-  return new Promise(async (resolve, reject) => {     
+  return new Promise((resolve, reject) => {     
     console.log("Subscribing to " + channel);
     
-    await channelTfl.attach();
-
-    
-      
+    channelTfl.attach(err => {      
       channelTfl.history({ untilAttach: true, limit: 1 }, (err2, resultPage) => {
         console.log("History retrieved for " + channelName); 
         
@@ -38,7 +36,7 @@ async function subscribeTfl(channelName, onSubscriptionData) {
       });
       
       channelTfl.subscribe(onSubscriptionMessage);
-   
+    });
   }); 
 }
 
