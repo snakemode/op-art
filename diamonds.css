@@ -1,7 +1,10 @@
 :root {
   --northern: #000;
   --metropolitan: #840b55;
-  --circle:
+  --circle: #ffcd00;
+  --victoria: #01a3e0;
+  --picadilly: #10069f;
+  --hammersmith: #e89cae;
 }
 
 .art {
@@ -21,4 +24,24 @@
 
 .not {
   background: white;
+}
+
+.metropolitan {
+  background-color: var(--metropolitan);
+}
+
+.circle {
+  background-color: var(--circle);
+}
+
+.victoria {
+  background-color: var(--victoria);
+}
+
+.picadilly {
+  background-color: var(--picadilly);
+}
+
+.hammersmith {
+  background-color: var(--hammersmith);
 }

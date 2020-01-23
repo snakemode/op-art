@@ -27,9 +27,9 @@ function subscribeTfl(channel) {
       
       let channelTfl = ably.channels.get(channel);
      
-      channelTfl.subscribe(function(msg) {
+      /*channelTfl.subscribe(function(msg) {
         console.log(msg.data);
-      });
+      });*/
       
       channelTfl.attach(function(err) {
         channelTfl.history({ untilAttach: true, limit: 1 }, function(err, resultPage) {
@@ -57,35 +57,38 @@ async function subscribeAll() {
   
   let allTrains = [];
   
-  allTrains.push(... await subscribeTfl(northern));
+  const fetchAllItems = [
+    subscribeTfl(northern),
+    subscribeTfl(victoria),
+    subscribeTfl(metropolitan),
+    subscribeTfl(piccadilly),
+    subscribeTfl(hammersmith),
+    subscribeTfl(circle)    
+  ];
+  
+  const items = await Promise.all(fetchAllItems);
+  
+  /*allTrains.push(... await subscribeTfl(northern));
   allTrains.push(... await subscribeTfl(victoria));
   allTrains.push(... await subscribeTfl(metropolitan));
   allTrains.push(... await subscribeTfl(piccadilly));
   allTrains.push(... await subscribeTfl(hammersmith));
-  allTrains.push(... await subscribeTfl(circle));
+  allTrains.push(... await subscribeTfl(circle));*/
   
-  console.log(allTrains.length);
+  console.log("Fetched initial state.")
   
-  allTrains.forEach(train => {
-    console.log(train);
-    /*trainSet.forEach(train => {
-      console.log(train);
-    });  */  
+  const orderedTrains = allTrains.sort((i1, i2) => {
+    if(i1.ExpectedArrival < i2.ExpectedArrival) {
+      return -1;
+    } else if(i1.ExpectedArrival > i2.ExpectedArrival) {
+      return 1;
+    }
+    return 0;
   });
   
-  // call Order trains here? Merge all the different sets?
   
-  console.log("Everything is now subscribed");
+  console.log(JSON.stringify(orderedTrains));
 }
 
 subscribeAll()
 
-function orderTrains(unordered) {
-  
-  const ordered = {};
-  Object.keys(unordered).sort().forEach(function(key) {
-    ordered[key] = unordered[key];
-  });
-
-  console.log(JSON.stringify(ordered));
-}
