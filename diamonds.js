@@ -69,12 +69,14 @@ async function asyncMain() {
   const allTrains = items.flat().sort(byArrivalTime);
   console.log(allTrains.length);
   
+  console.log(allTrains[0]);
+  
   allTrains.forEach((train, i) => {
     let square = document.createElement('div');
     square.className="square " + train.LineId;
 
     container.appendChild(square);
-    console.log(`train.ExpectedArrival);
+    console.log(`${train.ExpectedArrival} - ${train.LineId} - ${train.CurrentLocation}`);
     
     /*
     You are a ghost in the machine <3 <3 <3
