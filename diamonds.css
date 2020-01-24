@@ -7,10 +7,6 @@
   --hammersmith: #e89cae;
 }
 
-.frame {
-  max-height: calc(768px + 12vh);
-}
-
 .mount {
   overflow: hidden;
 }
@@ -19,7 +15,8 @@
   display: flex;
   flex-wrap: wrap;
   overflow: hidden;
-  max-height: 768px;
+  height: 48vw;
+  max-height: 80vh;
   margin: -1vw 0;
 }
 
@@ -51,4 +48,11 @@
 
 .hammersmith-city {
   fill: var(--hammersmith);
+}
+
+h1 {
+  position: relative;
+  width: max-content;
+  margin-top: 4vw;
+  text-align: center;
 }
