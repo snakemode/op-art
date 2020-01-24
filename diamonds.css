@@ -28,29 +28,28 @@
   width: 10%;
   height: 6vw;
   fill: tomato;
-  transform: skew(0, -40deg);
 }
 
 .northern {
-  background-color: var(--northern);
+  fill: var(--northern);
 }
 
 .metropolitan {
-  background-color: var(--metropolitan);
+  fill: var(--metropolitan);
 }
 
 .circle {
-  background-color: var(--circle);
+  fill: var(--circle);
 }
 
 .victoria {
-  background-color: var(--victoria);
+  fill: var(--victoria);
 }
 
 .piccadilly {
-  background-color: var(--piccadilly);
+  fill: var(--piccadilly);
 }
 
 .hammersmith-city {
-  background-color: var(--hammersmith);
+  fill: var(--hammersmith);
 }

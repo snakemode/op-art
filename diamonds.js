@@ -1,7 +1,6 @@
 let ably = new Ably.Realtime('2L2RQA.8DEPlw:Oc37iQaXFFdvT-Zx');
 let trains = {};
-let ordered = {};
-let container = document.getElementById('art');
+let squares = document.querySelectorAll('.square');
 
 // Because global scope can't await.
 async function asyncMain() {
@@ -41,18 +40,11 @@ async function subscribeToLine(channelName, onSubscriptionData) {
 }
 
 function renderSingleTrain(train, index) {  
-
-  // console.log(`${train.ExpectedArrival} - ${train.LineId} - ${train.CurrentLocation}`);
+   console.log(`${train.ExpectedArrival} - ${train.LineId} - ${train.CurrentLocation}`);
 }
 
 function onSubscriptionMessage(data) {
-  console.log(data); 
-  /*
-    arrivals = arrivals.reverse();
-    arrivals.forEach((arrival) => {
-      let arrivalTime = new Date(arrival.ExpectedArrival).toLocaleTimeString();
-    });
-  */
+  //console.log(data); 
 }
 
 function byArrivalTime(i1, i2) {
@@ -69,11 +61,7 @@ function byArrivalTime(i1, i2) {
 async function attachPromise(channel) {
   return new Promise((resolve, reject) => {
     channel.attach(err => {      
-      if (err) {
-        reject(err);
-      } else {
-        resolve();
-      }
+      if (err) { reject(err); } else { resolve(); }
     });
   });
 }
@@ -81,11 +69,7 @@ async function attachPromise(channel) {
 async function getHistoryPromise(channel, params) {
   return new Promise((resolve, reject) => {
     channel.history(params, (err, response) => {
-      if (err) { 
-        reject(err);
-      } else {
-        resolve(response);
-      }
+      if (err) { reject(err); } else { resolve(response); }
     });
   });
 }
