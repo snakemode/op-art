@@ -17,7 +17,7 @@ async function asyncMain() {
   const trains = [];
   
   for (let collection of items) {
-    const subset = collection.slice(1, 30);
+    const subset = collection.slice(1, 20);
     trains.push(...subset);
   }
   
@@ -38,9 +38,10 @@ async function subscribeToLine(channelName, onSubscriptionData) {
   return recentMessage.data;
 }
 
-function renderSingleTrain(train, index) {  
+function renderSingleTrain(train, index) {
   squares[index].classList.add(train.LineId);
-   console.log(`${train.ExpectedArrival} - ${train.LineId} - ${train.CurrentLocation}`);
+  squares[index + 50].classList.add(train.LineId);  //too many squares to fill
+  squares[index + 100].classList.add(train.LineId);
 }
 
 function onSubscriptionMessage(data) {
