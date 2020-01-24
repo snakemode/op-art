@@ -2,7 +2,7 @@ let ably = new Ably.Realtime('2L2RQA.8DEPlw:Oc37iQaXFFdvT-Zx');  //get your free
 let trains = {};
 let squares = document.querySelectorAll('.square');
 
-// Because global scope can't await.
+// Because global scope can't await. 
 async function asyncMain() {
   
   const items = await Promise.all([
