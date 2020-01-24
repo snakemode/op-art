@@ -1,3 +1,7 @@
+.frame {
+  display: inline-block;
+}
+
 .mount{
   display: inline-block;
 }

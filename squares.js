@@ -3,13 +3,26 @@ let body = document.body,
 
 let height = Math.max( body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight );
 let width = Math.max( body.scrollWidth, body.offsetWidth, html.clientWidth, html.scrollWidth, html.offsetWidth );
-let gap = width/100 * 28;
 let holder = document.getElementById("holder");
-let colHeight = Math.trunc((height - gap) / 100);
-let rowLen = Math.trunc((width - gap) / 100);
-let quantity = colHeight * rowLen;
+let quantity;
+let rowLen;
+let colHeight;
 
-holder.style.width = rowLen * 100 + "px"
+if (body.classList.contains('framed')) {
+  let gap = width/100 * 28;
+  colHeight = Math.trunc((height - gap) / 100);
+  rowLen = Math.trunc((width - gap) / 100);
+  quantity = colHeight * rowLen;
+  holder.style.width = rowLen * 100 + "px";
+  console.log('yes')
+} else {
+  rowLen = width / 10;
+  colHeight = height / rowLen;
+  quantity = colHeight * rowLen;
+  holder.style.width = "100%";
+}
+
+
 
 for (var i = 0; i < quantity; i++) {
   let square = document.createElement('div');
