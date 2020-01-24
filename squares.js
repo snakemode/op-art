@@ -16,13 +16,11 @@ if (body.classList.contains('framed')) {
   holder.style.width = rowLen * 100 + "px";
   console.log('yes')
 } else {
-  rowLen = width / 10;
-  colHeight = height / rowLen;
+  rowLen = 10;
+  colHeight = Math.ceil(height / (width / rowLen));
   quantity = colHeight * rowLen;
   holder.style.width = "100%";
 }
-
-
 
 for (var i = 0; i < quantity; i++) {
   let square = document.createElement('div');
