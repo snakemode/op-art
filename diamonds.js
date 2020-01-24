@@ -14,15 +14,14 @@ async function asyncMain() {
     subscribeToLine("circle")
   ]);
   
-  const selectedTrains = [];
+  const trains = [];
   
-  for(let collection of items) {
+  for (let collection of items) {
     const subset = collection.slice(1, 20);
-    selectedTrains.push(...subset);
+    trains.push(...subset);
   }
   
-  const sortedTrains = selectedTrains.sort(byArrivalTime);
-  sortedTrains.forEach(renderSingleTrain);
+  trains.sort(byArrivalTime).forEach(renderSingleTrain);
 }
 
 async function subscribeToLine(channelName, onSubscriptionData) {
@@ -40,6 +39,7 @@ async function subscribeToLine(channelName, onSubscriptionData) {
 }
 
 function renderSingleTrain(train, index) {  
+  squares[index].classList.add(train.LineId);
    console.log(`${train.ExpectedArrival} - ${train.LineId} - ${train.CurrentLocation}`);
 }
 
