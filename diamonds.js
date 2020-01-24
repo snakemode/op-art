@@ -17,7 +17,7 @@ async function asyncMain() {
   const trains = [];
   
   for (let collection of items) {
-    const subset = collection.slice(1, 20);
+    const subset = collection.slice(1, 30);
     trains.push(...subset);
   }
   

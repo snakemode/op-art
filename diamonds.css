@@ -8,7 +8,7 @@
 }
 
 .frame {
-  max-height: 80vh;
+  max-height: calc(768px + 12vh);
 }
 
 .mount {
@@ -19,8 +19,8 @@
   display: flex;
   flex-wrap: wrap;
   overflow: hidden;
-  height: calc(80vh - 200px);
-  margin: -3vw 0;
+  max-height: 768px;
+  margin: -1vw 0;
 }
 
 .square {
