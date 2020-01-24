@@ -71,15 +71,9 @@ async function asyncMain() {
   const allTrains = selectedTrains.sort(byArrivalTime);  
   
   allTrains.forEach((train, i) => {
-    let square = document.createElement('div');
-    square.className="square " + train.LineId;
-    container.appendChild(square);
+   
     
     // console.log(`${train.ExpectedArrival} - ${train.LineId} - ${train.CurrentLocation}`);
-    
-    /*
-    You are a ghost in the machine <3 <3 <3
-    */
   });
   
 }

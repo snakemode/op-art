@@ -27,7 +27,7 @@
 .square {
   width: 10%;
   height: 6vw;
-  background: tomato;
+  fill: tomato;
   transform: skew(0, -40deg);
 }
 
