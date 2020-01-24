@@ -3,41 +3,56 @@ let trains = {};
 let ordered = {};
 let container = document.getElementById('art');
 
-function updateTfl(arrivals) {
-  arrivals = arrivals.reverse();
-  arrivals.forEach((arrival) => {
-    let arrivalTime = new Date(arrival.ExpectedArrival).toLocaleTimeString();
-  });
+// Because global scope can't await.
+async function asyncMain() {
+  
+  const items = await Promise.all([
+    subscribeToLine("northern"),
+    subscribeToLine("victoria"),
+    subscribeToLine("metropolitan"),
+    subscribeToLine("piccadilly"),
+    subscribeToLine("hammersmith-city"),
+    subscribeToLine("circle")
+  ]);
+  
+  const selectedTrains = [];
+  
+  for(let collection of items) {
+    const subset = collection.slice(1, 20);
+    selectedTrains.push(...subset);
+  }
+  
+  const sortedTrains = selectedTrains.sort(byArrivalTime);
+  sortedTrains.forEach(renderSingleTrain);
+}
+
+async function subscribeToLine(channelName, onSubscriptionData) {
+  const channelId = `[product:ably-tfl/tube]tube:${channelName}:940GZZLUKSX:arrivals`;
+  const channel = ably.channels.get(channelId);
+  
+  await attachPromise(channel);  
+  channel.subscribe(onSubscriptionMessage); 
+  
+  const resultPage = await getHistoryPromise(channel, { untilAttach: true, limit: 1 });
+  console.log("History retrieved for " + channelName); 
+  
+  const recentMessage = resultPage.items[0] || { data: [] }; 
+  return recentMessage.data;
+}
+
+function renderSingleTrain(train, index) {  
+
+  // console.log(`${train.ExpectedArrival} - ${train.LineId} - ${train.CurrentLocation}`);
 }
 
 function onSubscriptionMessage(data) {
   console.log(data); 
-}
-
-async function subscribeTfl(channelName, onSubscriptionData) {
-  const channel = `[product:ably-tfl/tube]tube:${channelName}:940GZZLUKSX:arrivals`;
-  let channelTfl = ably.channels.get(channel);
-  await channelTfl.attach();
-  
-  return new Promise((resolve, reject) => {     
-    console.log("Subscribing to " + channel);
-    
-    channelTfl.attach(err => {      
-      channelTfl.history({ untilAttach: true, limit: 1 }, (err2, resultPage) => {
-        console.log("History retrieved for " + channelName); 
-        
-        if (err2) {
-            reject(err2);
-            return;
-        }
-
-        let recentMessage = resultPage.items[0] || { data: [] };   
-        resolve(recentMessage.data);        
-      });
-      
-      channelTfl.subscribe(onSubscriptionMessage);
+  /*
+    arrivals = arrivals.reverse();
+    arrivals.forEach((arrival) => {
+      let arrivalTime = new Date(arrival.ExpectedArrival).toLocaleTimeString();
     });
-  }); 
+  */
 }
 
 function byArrivalTime(i1, i2) {
@@ -49,33 +64,31 @@ function byArrivalTime(i1, i2) {
     return 0;
 }
 
-async function asyncMain() { 
-  
-  const subscriptionPromises = [
-    subscribeTfl("northern"),
-    subscribeTfl("victoria"),
-    subscribeTfl("metropolitan"),
-    subscribeTfl("piccadilly"),
-    subscribeTfl("hammersmith-city"),
-    subscribeTfl("circle")
-  ];
-  
-  const items = await Promise.all(subscriptionPromises);
-  
-  const selectedTrains = [];
-  for(let collection of items) {
-    const subset = collection.slice(1, 20);
-    selectedTrains.push(...subset);
-  }
-  
-  const allTrains = selectedTrains.sort(byArrivalTime);  
-  
-  allTrains.forEach((train, i) => {
-   
-    
-    // console.log(`${train.ExpectedArrival} - ${train.LineId} - ${train.CurrentLocation}`);
+// Promisifying Ably API below here so async / await works
+
+async function attachPromise(channel) {
+  return new Promise((resolve, reject) => {
+    channel.attach(err => {      
+      if (err) {
+        reject(err);
+      } else {
+        resolve();
+      }
+    });
   });
-  
 }
 
+async function getHistoryPromise(channel, params) {
+  return new Promise((resolve, reject) => {
+    channel.history(params, (err, response) => {
+      if (err) { 
+        reject(err);
+      } else {
+        resolve(response);
+      }
+    });
+  });
+}
+
+// Entrypoint
 asyncMain();
