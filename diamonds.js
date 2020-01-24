@@ -1,4 +1,4 @@
-let ably = new Ably.Realtime('2L2RQA.8DEPlw:Oc37iQaXFFdvT-Zx');
+let ably = new Ably.Realtime('2L2RQA.8DEPlw:Oc37iQaXFFdvT-Zx');  //get your free api key here https://www.ably.io/
 let trains = {};
 let squares = document.querySelectorAll('.square');
 
