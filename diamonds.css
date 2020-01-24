@@ -12,11 +12,8 @@
 }
 
 .art {
-  display: flex;
-  flex-wrap: wrap;
   overflow: hidden;
-  height: 48vw;
-  max-height: 80vh;
+  max-height: min-content;
   margin: -1vw 0;
 }
 
